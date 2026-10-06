@@ -1,0 +1,8 @@
+import {createFileRoute} from '@tanstack/react-router'
+import {useState} from 'react'
+import {Search} from 'lucide-react'
+import {Button} from '@/components/ui/button'
+import {PageHeading,ProjectCard,ContactBanner} from '@/components/aura-site'
+import {projects,pageHead} from '@/lib/aura-data'
+export const Route=createFileRoute('/projects/')({head:()=>pageHead('Selected Projects','Explore AuraNest’s concept collection of residential, commercial and renovation interiors across India.','/projects'),component:Projects})
+function Projects(){const [category,setCategory]=useState('All projects');const [query,setQuery]=useState('');const filtered=projects.filter(p=>(category==='All projects'||p.category===category)&&`${p.name} ${p.city} ${p.style}`.toLowerCase().includes(query.toLowerCase()));return <main><PageHeading label="Selected works · Concept portfolio" title="Spaces with a point of view." description="Different stories. A shared attention to light, material and the art of living well."/><section className="wrap pb-20"><div className="filters">{['All projects','Residential','Commercial','Renovation'].map(c=><Button variant={c===category?'default':'filter'} aria-pressed={c===category} onClick={()=>setCategory(c)} key={c}>{c}</Button>)}<label className="search-field"><Search/><input aria-label="Search projects" placeholder="Search projects" value={query} onChange={e=>setQuery(e.target.value)}/></label></div>{filtered.length?<div className="project-grid">{filtered.map(p=><ProjectCard key={p.slug} project={p}/>)}</div>:<div className="empty-state">No projects match your search.<div className="mt-4"><Button variant="outline" onClick={()=>{setQuery('');setCategory('All projects')}}>Clear filters</Button></div></div>}</section><ContactBanner/></main>}

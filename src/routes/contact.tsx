@@ -1,0 +1,6 @@
+import {createFileRoute} from '@tanstack/react-router'
+import {PageHeading} from '@/components/aura-site'
+import {ConsultationForm} from '@/components/consultation-form'
+import {pageHead} from '@/lib/aura-data'
+export const Route=createFileRoute('/contact')({head:()=>pageHead('Start a Conversation','Share your interior design vision with AuraNest through a validated, frontend-only demo consultation form.','/contact'),component:Contact})
+function Contact(){return <main><PageHeading label="Get in touch" title="Your next chapter starts here." description="Tell us a little about your space. Let’s imagine what it could become."/><section className="wrap contact-grid pb-24"><div><h2>A conversation.<br/>A new possibility.</h2><p className="body-copy">Whether you’re beginning with a blank canvas or reimagining a familiar place, every thoughtful design starts with a conversation.</p><div className="mt-10"><p className="eyebrow">Our home base</p><p>Bangalore, India</p><p className="body-copy text-xs">Design inspiration across India.</p></div><p className="form-disclaimer mt-10">AuraNest is a concept studio. Projects, testimonials and studio figures are sample content; photography shows illustrative interiors.</p></div><ConsultationForm/></section></main>}
